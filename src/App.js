@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { GEO_API_URL, geoAPIoptions } from "./components/geocityAPI";
 import "./App.css";
 
 // const APIrelated ={
@@ -23,10 +22,6 @@ function App() {
         setCity(result);
       });
 
-    // fetch(`${GEO_API_URL}/cities?minPopulation=1000&namePrefix=${search}`, geoAPIoptions)
-    //   .then((response) => response.json())
-    //   .then((response) => setCity(response))
-    //   .catch((err) => console.error(err));
   };
 
   return (
@@ -44,10 +39,6 @@ function App() {
       </div>
 
       <div>DropdownMenu placeholder</div>
-
-      <p>{City[0].name}</p>
-      <p>Longitude: {City[0].lon}</p>
-      <p>Latitude: {City[0].lat}</p>
 
       <h2 className="Temp">Temperature Place holder</h2>
 
