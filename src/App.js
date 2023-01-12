@@ -10,7 +10,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [City, setCity] = useState({});
 
-  const searchPressed = () => {
+  const searchPressed = async () => {
     fetch(
       "http://api.openweathermap.org/geo/1.0/direct?q=" +
         search +
@@ -20,9 +20,12 @@ function App() {
       .then((result) => {
         console.log(result);
         setCity(result);
+        cityy = result;
       });
 
   };
+
+  var cityy = [];
 
   return (
     <div className = "Container">
@@ -37,10 +40,12 @@ function App() {
 
         <button onClick={searchPressed}>Search</button>
       </div>
-
+      <h2>{}</h2>
       <div>DropdownMenu placeholder</div>
 
+
       <h2 className="Temp">Temperature Place holder</h2>
+
 
       <h2 className="Condition">Condition Place holder</h2>
     </div>
