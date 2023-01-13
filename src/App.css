@@ -37,7 +37,7 @@
 }
 
 .SearchResult{
-  min-width: 230px;
+  min-width: 237px;
   text-align: left;
   border-color: transparent;
 
@@ -45,4 +45,9 @@
 
 .SearchResult:hover{
   background-color: white;
+}
+
+.lonlat{
+  margin-top: 0.01px;
+  background-color: rgb(128, 240, 135);
 }
