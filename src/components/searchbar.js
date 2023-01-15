@@ -1,11 +1,12 @@
 import { hasFormSubmit } from "@testing-library/user-event/dist/utils";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function Searchbar(props) {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
-  const [city, setCity] = useState([]);
+  const [individualresult, setIndividualResult] = useState([]);
 
+  // Lat Lon fetch api
   useEffect(() => {
     let timer = setTimeout(() => {
       if (search.length > 0) {
@@ -26,6 +27,26 @@ function Searchbar(props) {
                 });
               }
             }
+
+            for (var i = 0; i < resData.length; i++) {
+              fetch(
+                "https://api.openweathermap.org/data/2.5/weather?lat=" +
+                  resData[i].lat +
+                  "&lon=" +
+                  resData[i].lon +
+                  "&appid=49bdc31b415440304250deae9af0e13b"
+              )
+                .then((response) => response.json())
+                .then((responseData) => {
+                  console.log(responseData);
+                  setIndividualResult([]);
+                  for (const key in responseData) {
+                    setIndividualResult((beforeResult) => {
+                      return [...beforeResult, responseData[key]];
+                    });
+                  }
+                });
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -33,7 +54,7 @@ function Searchbar(props) {
       } else {
         setResult([]);
       }
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
@@ -53,14 +74,20 @@ function Searchbar(props) {
         ></input>
       </div>
       <div>
-        {result.map((result, index) => (
-          <div className={`${result.lon} ${result.lat}`}>
-            <button className="SearchResult">
+        {result.map((result) => (
+          <div key={`${result.lon} ${result.lat}`}>
+            <p>
               {result.name + ", " + result.country + ", " + result.state}
-            </button>
-            <div>
-                <p className = "lonlat">Latitude: {result.lat} Longitude: {result.lon}</p>
-            </div>
+              <br/>
+              {"Latitude: " + result.lat + " Longitude: " + result.lon}
+            </p>
+
+            {individualresult.map((individualresult) => (
+              <p>
+                {individualresult.temp}
+              </p>
+            ))}
+            <p>-----------------------------------------</p>
           </div>
         ))}
       </div>

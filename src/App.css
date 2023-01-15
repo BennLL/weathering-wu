@@ -1,4 +1,19 @@
 *{
+  background-color: beige;
+}
+
+.SearchResult{
+  min-width: 237px;
+  text-align: left;
+  border-color: transparent;
+  background-color: rgb(207, 207, 207);
+}
+
+.SearchResult:hover{
+  background-color: white;
+}
+
+/* *{
   background-color: rgb(201, 232, 246);
 }
 
@@ -13,6 +28,7 @@
   background-size:     cover;                      
   background-repeat:   no-repeat;
   background-position: center center;
+  align-items: center;
 
 }
 
@@ -20,6 +36,7 @@
 .SearchBar{
   width: 230px;
   background-color: transparent;
+  align-items: center;
 }
 
 .Header{
@@ -50,4 +67,4 @@
 .lonlat{
   margin-top: 0.01px;
   background-color: rgb(128, 240, 135);
-}
+} */

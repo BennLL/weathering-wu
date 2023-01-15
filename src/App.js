@@ -18,10 +18,3 @@ function App() {
 
 export default App;
 
-/*
-  TO DO:
-  - differnt cities with same name
-  - Styling
-  - Search bar
-  - implement lat lon and weather api
-*/
