@@ -62,6 +62,7 @@ function Searchbar(props) {
   return (
     <div className="container">
       <header className="header">Weathering WU</header>
+      <br />
       <div>
         <input
           type="text"
@@ -72,32 +73,23 @@ function Searchbar(props) {
         ></input>
       </div>
       <div>
-        <div className="searchresult">
-          {result.map((result) => (
-            <div key={`${result.lon} ${result.lat}`}>
-              <p>
-                {result.name + ", " + result.country + ", " + result.state}
-                <br />
-                {"Latitude: " + result.lat}
-                <br />
-                {"Longitude: " + result.lon}
-              </p>
-            </div>
-          ))}
-        </div>
         <div className="individualresult">
           {individualresult.map((individualresult, index) => (
             <div key={index}>
-              <p>
+              <p className = "resultstyle">
+                {individualresult.name +
+                  ", Longitude: " +
+                  individualresult.coord.lon +
+                  ", Latitude: " +
+                  individualresult.coord.lat}
+                <br />
                 {"Temperature: " +
                   individualresult.main.temp +
                   "°C, Feels like: " +
                   individualresult.main.feels_like +
                   "°C"}
                 <br />
-                {"Humidity: " +
-                  individualresult.main.humidity +
-                  "% "}
+                {"Humidity: " + individualresult.main.humidity + "% "}
                 <br />
                 {"Condition: " +
                   individualresult.weather[0].main +
@@ -107,6 +99,11 @@ function Searchbar(props) {
             </div>
           ))}
         </div>
+      </div>
+      <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
       </div>
     </div>
   );
