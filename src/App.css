@@ -1,70 +1,44 @@
-*{
+
+.container {
+  max-width: 1080px;
+  margin: 20px auto;
+}
+
+.header {
+  font-size: 30px;
+  background-color: aqua;
+  text-align: center;
+  max-width: 100%;
+}
+
+.searchbar {
+  border: solid 3px black;
+  box-sizing: border-box;
+  font-size: 2em;
+  height: 2em;
+  outline: solid #fc0 0;
+  padding: .5em;
+  width: 100%;
+  z-index: 1;
+}
+
+.searchresult {
+  width: 49.5%;
+  float: left;
+  border: 1px solid red;
   background-color: beige;
 }
 
-.SearchResult{
-  min-width: 237px;
-  text-align: left;
-  border-color: transparent;
-  background-color: rgb(207, 207, 207);
+.individualresult {
+  width: 50%;
+  border: 1px solid green;
+  float: left;
+  background-color: beige;
 }
 
-.SearchResult:hover{
-  background-color: white;
-}
-
-/* *{
-  background-color: rgb(201, 232, 246);
-}
-
-.Container{
-  max-width: auto;
-  min-width: 500px;
-  margin: auto;
-  overflow: auto;
-  min-height: 300px;
-  padding: 30px;
-  background-image: url("https://images7.alphacoders.com/116/1161810.jpg");
-  background-size:     cover;                      
-  background-repeat:   no-repeat;
+body{
+  background-image: url("https://images6.alphacoders.com/456/thumb-1920-456528.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center center;
-  align-items: center;
-
 }
-
-
-.SearchBar{
-  width: 230px;
-  background-color: transparent;
-  align-items: center;
-}
-
-.Header{
-  text-align:center;
-  background-color: transparent;
-  text-transform:uppercase;
-  font-size:26px; 
-  font-weight: bold;
-  letter-spacing:1px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: 16px 0;
-  grid-gap: 22px;
-  color: white;
-}
-
-.SearchResult{
-  min-width: 237px;
-  text-align: left;
-  border-color: transparent;
-
-}
-
-.SearchResult:hover{
-  background-color: white;
-}
-
-.lonlat{
-  margin-top: 0.01px;
-  background-color: rgb(128, 240, 135);
-} */

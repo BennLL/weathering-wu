@@ -27,24 +27,21 @@ function Searchbar(props) {
                 });
               }
             }
-
+            setIndividualResult([]);
             for (var i = 0; i < resData.length; i++) {
               fetch(
                 "https://api.openweathermap.org/data/2.5/weather?lat=" +
                   resData[i].lat +
                   "&lon=" +
                   resData[i].lon +
-                  "&appid=49bdc31b415440304250deae9af0e13b"
+                  "&appid=49bdc31b415440304250deae9af0e13b&units=metric"
               )
                 .then((response) => response.json())
                 .then((responseData) => {
                   console.log(responseData);
-                  setIndividualResult([]);
-                  for (const key in responseData) {
-                    setIndividualResult((beforeResult) => {
-                      return [...beforeResult, responseData[key]];
-                    });
-                  }
+                  setIndividualResult((beforeResult) => {
+                    return [...beforeResult, responseData];
+                  });
                 });
             }
           })
@@ -53,6 +50,7 @@ function Searchbar(props) {
           });
       } else {
         setResult([]);
+        setIndividualResult([]);
       }
     }, 500);
 
@@ -62,34 +60,53 @@ function Searchbar(props) {
   }, [search]);
 
   return (
-    <div className="Container">
-      <header className="Header">Weathering WU</header>
+    <div className="container">
+      <header className="header">Weathering WU</header>
       <div>
         <input
           type="text"
-          className="SearchBar"
+          className="searchbar"
           placeholder="Enter a city"
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         ></input>
       </div>
       <div>
-        {result.map((result) => (
-          <div key={`${result.lon} ${result.lat}`}>
-            <p>
-              {result.name + ", " + result.country + ", " + result.state}
-              <br/>
-              {"Latitude: " + result.lat + " Longitude: " + result.lon}
-            </p>
-
-            {individualresult.map((individualresult) => (
+        <div className="searchresult">
+          {result.map((result) => (
+            <div key={`${result.lon} ${result.lat}`}>
               <p>
-                {individualresult.temp}
+                {result.name + ", " + result.country + ", " + result.state}
+                <br />
+                {"Latitude: " + result.lat}
+                <br />
+                {"Longitude: " + result.lon}
               </p>
-            ))}
-            <p>-----------------------------------------</p>
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
+        <div className="individualresult">
+          {individualresult.map((individualresult, index) => (
+            <div key={index}>
+              <p>
+                {"Temperature: " +
+                  individualresult.main.temp +
+                  "°C, Feels like: " +
+                  individualresult.main.feels_like +
+                  "°C"}
+                <br />
+                {"Humidity: " +
+                  individualresult.main.humidity +
+                  "% "}
+                <br />
+                {"Condition: " +
+                  individualresult.weather[0].main +
+                  ", Description: " +
+                  individualresult.weather[0].description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
