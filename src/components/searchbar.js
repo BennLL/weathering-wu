@@ -1,4 +1,3 @@
-import { hasFormSubmit } from "@testing-library/user-event/dist/utils";
 import React, { useState, useEffect } from "react";
 
 function Searchbar(props) {
@@ -72,34 +71,55 @@ function Searchbar(props) {
           value={search}
         ></input>
       </div>
-      <div>
-        <div className="individualresult">
-          {individualresult.map((individualresult, index) => (
-            <div key={index}>
-              <p className = "resultstyle">
-                {individualresult.name +
-                  ", Longitude: " +
-                  individualresult.coord.lon +
-                  ", Latitude: " +
-                  individualresult.coord.lat}
-                <br />
-                {"Temperature: " +
-                  individualresult.main.temp +
-                  "°C, Feels like: " +
-                  individualresult.main.feels_like +
-                  "°C"}
-                <br />
-                {"Humidity: " + individualresult.main.humidity + "% "}
-                <br />
-                {"Condition: " +
-                  individualresult.weather[0].main +
-                  ", Description: " +
-                  individualresult.weather[0].description}
-              </p>
-            </div>
-          ))}
+      {result.length > 0 && (
+        <div>
+          <div className="result">
+            {result.map((result, index) => (
+              <div key={index}>
+                <p>
+                  {"Country: " + result.country}
+                  <br />
+                  {"City: " + result.name}
+                  <br />
+                  {"State: " + result.state}
+                  <br />
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {individualresult.length > 0 && (
+        <div>
+          <div className="individualresult">
+            {individualresult.map((individualresult, index) => (
+              <div key={index}>
+                <p>
+                  {"Longitude: " +
+                    individualresult.coord.lon +
+                    ", Latitude: " +
+                    individualresult.coord.lat}
+                  <br />
+                  {"Temperature: " +
+                    individualresult.main.temp +
+                    "°C, Feels like: " +
+                    individualresult.main.feels_like +
+                    "°C," +
+                    " Humidity: " +
+                    individualresult.main.humidity +
+                    "% "}
+                  <br />
+                  {"Condition: " +
+                    individualresult.weather[0].main +
+                    ", Description: " +
+                    individualresult.weather[0].description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div>
         <div class="wave"></div>
         <div class="wave"></div>
