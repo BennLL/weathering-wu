@@ -5,6 +5,7 @@
 }
 
 .header {
+  margin-top: 150px;
   color: white;
   font-size: 60px;
   background-color: transparent;
@@ -35,7 +36,7 @@
 }
 
 .individualresult {
-  width: 69.35%;
+  width: 69.44%;
   border: 3px solid white;
   float: left;
   background-color: rgb(236, 236, 225);
