@@ -15,4 +15,4 @@ Made with
 
 ![Example Screenshots](https://img.shields.io/badge/-Showcase%20-darkgrey?style=flat)
 
-![GIF](https://i.imgur.com/u8mpQmQ.gifv)
+![ezgif-2-b4930de9f0](https://user-images.githubusercontent.com/110274203/236975509-2b40c4bb-16d6-4fff-8ff0-6241c109b475.gif)
