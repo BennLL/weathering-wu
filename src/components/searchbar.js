@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+const key = process.env.REACT_APP_WEATHER_API_KEY;
 
 function Searchbar(props) {
   const [search, setSearch] = useState("");
@@ -12,7 +13,7 @@ function Searchbar(props) {
         fetch(
           "http://api.openweathermap.org/geo/1.0/direct?q=" +
             search +
-            "&limit=5&appid=49bdc31b415440304250deae9af0e13b"
+            "&limit=5&appid=" + key
         )
           .then((res) => res.json())
           .then((resData) => {
@@ -33,7 +34,7 @@ function Searchbar(props) {
                   resData[i].lat +
                   "&lon=" +
                   resData[i].lon +
-                  "&appid=49bdc31b415440304250deae9af0e13b&units=metric"
+                  "&appid=" + key + "&units=metric"
               )
                 .then((response) => response.json())
                 .then((responseData) => {
