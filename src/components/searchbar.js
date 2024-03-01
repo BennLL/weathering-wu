@@ -10,7 +10,7 @@ function SearchBar() {
     useEffect(() => {
         let timer = setTimeout(() => {
             if (search.length > 0) {
-                fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${key}`)
+                fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${key}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log('API response:', data);
