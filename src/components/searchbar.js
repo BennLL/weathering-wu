@@ -26,7 +26,7 @@ function SearchBar() {
                         console.log("Error:", error)
                     });
             }
-        }, 250);
+        }, 400);
         return () => {
             clearTimeout(timer);
         };
