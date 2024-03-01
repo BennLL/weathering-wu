@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/weathering-wu/static/css/main.ada425c5.css",
-    "main.js": "/weathering-wu/static/js/main.c1d68d59.js",
+    "main.js": "/weathering-wu/static/js/main.c47ad106.js",
     "static/js/787.a839d637.chunk.js": "/weathering-wu/static/js/787.a839d637.chunk.js",
     "index.html": "/weathering-wu/index.html",
     "main.ada425c5.css.map": "/weathering-wu/static/css/main.ada425c5.css.map",
-    "main.c1d68d59.js.map": "/weathering-wu/static/js/main.c1d68d59.js.map",
+    "main.c47ad106.js.map": "/weathering-wu/static/js/main.c47ad106.js.map",
     "787.a839d637.chunk.js.map": "/weathering-wu/static/js/787.a839d637.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ada425c5.css",
-    "static/js/main.c1d68d59.js"
+    "static/js/main.c47ad106.js"
   ]
 }
