@@ -9,64 +9,6 @@ body {
   overflow: hidden;
 }
 
-/* rain effect */
-:root {
-  --thunder-duration: 10s;
-  --thunder-delay: 5s;
-}
-
-hr.thunder {
-  border: unset;
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  animation-name: thunder;
-  animation-duration: var(--thunder-duration);
-  animation-timing-function: linear;
-  animation-delay: var(--thunder-delay);
-  animation-iteration-count: infinite;
-}
-
-hr:not(.thunder) {
-  width: 50px;
-  border-color: transparent;
-  border-right-color: rgba(255, 255, 255, 0.7);
-  border-right-width: 50px;
-  position: absolute;
-  bottom: 100%;
-  transform-origin: 100% 50%;
-  animation-name: rain;
-  animation-duration: 400s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes rain {
-  from {
-    transform: rotate(105deg) translateX(0);
-  }
-  to {
-    transform: rotate(105deg) translateX(calc(300vw + 20px));
-  }
-
-}
-
-/* thunder effect */
-/* @keyframes thunder {
-  0% {
-    background-color: transparent;
-  }
-  1% {
-    background-color: white;
-  }
-  2% {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  8% {
-    background-color: transparent;
-  }
-} */
-
 /* main section */
 .whole {
   min-width: 400px;
@@ -150,4 +92,102 @@ li {
 .fah {
   color: blue;
   font-size: 20px;
+}
+
+
+/* rain effect */
+:root {
+  --thunder-duration: 10s;
+  --thunder-delay: 5s;
+}
+
+hr.thunder {
+  border: unset;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  animation-name: thunder;
+  animation-duration: var(--thunder-duration);
+  animation-timing-function: linear;
+  animation-delay: var(--thunder-delay);
+  animation-iteration-count: infinite;
+}
+
+hr:not(.thunder) {
+  width: 50px;
+  border-color: transparent;
+  border-right-color: rgba(255, 255, 255, 0.7);
+  border-right-width: 50px;
+  position: absolute;
+  bottom: 100%;
+  transform-origin: 100% 50%;
+  animation-name: rain;
+  animation-duration: 400s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rain {
+  from {
+    transform: rotate(105deg) translateX(0);
+  }
+  to {
+    transform: rotate(105deg) translateX(calc(300vw + 20px));
+  }
+
+}
+
+/* thunder effect */
+/* @keyframes thunder {
+  0% {
+    background-color: transparent;
+  }
+  1% {
+    background-color: white;
+  }
+  2% {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  8% {
+    background-color: transparent;
+  }
+} */
+
+
+@media screen and (max-width: 800px) {
+  body{
+    margin: 20px;
+  }
+
+  .whole{
+    min-width: 200px;
+    padding: 5px;
+    margin: auto;
+  }
+
+  /* Title */
+  .titleSection > h1{
+    font-size: 30px;
+  }
+
+  /* search bar */
+  .searchBar{
+    height: 30px;
+    font-size: 20px;
+  }
+
+  /* search result */
+  .searchResultSection{
+    font-size: 90%;
+  }
+
+  li{
+    margin-top: 2px;
+  }
+
+  /* cityDetails */
+  .cityDetails{
+    font-size: 90%;
+    max-height: 90%;
+  }
 }

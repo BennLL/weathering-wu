@@ -7,7 +7,7 @@ function App() {
   // raining effect
   useEffect(() => {
     let hrElement;
-    let counter = 100;
+    let counter = 70;
     for (let i = 0; i < counter; i++) {
       hrElement = document.createElement("HR");
       hrElement.style.left = Math.floor(Math.random() * window.innerWidth) + "px";

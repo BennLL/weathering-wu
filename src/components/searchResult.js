@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CityDetails from "./cityDetails";
-const key = process.env.REACT_APP_WEATHER_API_KEY;
+const key = 'b4d16f19d9fb0845a259f9804be686f8'; // throwaway
+//const key = process.env.REACT_APP_WEATHER_API_KEY;
 
 function SearchResult({ result }) {
     const [individualResult, setIndividualResult] = useState([]);
@@ -29,7 +30,7 @@ function SearchResult({ result }) {
                             onClick={() => {
                                 fetchWeatherDetails(city.lat, city.lon);
                             }}>
-                            {city.name}, {city.state}, {city.country}<br></br> Lat: {city.lat} Lon: {city.lon}
+                            {city.name}, {city.state}, {city.country}<br></br> Lat: {city.lat.toFixed(2)} Lon: {city.lon.toFixed(2)}
                         </li>)}
             </ul>
             <CityDetails city={individualResult}></CityDetails>
