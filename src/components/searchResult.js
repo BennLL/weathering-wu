@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CityDetails from "./cityDetails";
-const key = 'b4d16f19d9fb0845a259f9804be686f8'; // throwaway
-//const key = process.env.REACT_APP_WEATHER_API_KEY;
+
+const key = process.env.REACT_APP_WEATHER_API_KEY;
 
 function SearchResult({ result }) {
     const [individualResult, setIndividualResult] = useState([]);
