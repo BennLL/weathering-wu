@@ -18,30 +18,40 @@ export async function loginUser({ username, password }) {
         throw new Error('Invalid password!')
     }
 
-    const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' })
+    const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
     return token;
 }
 
 export async function updateFavoriteCity(userId, cityData) {
     return await User.findOneAndUpdate(
         userId,
-        {$set: {favoriteCity: cityData}},
-        {new: true}
+        { $set: { favoriteCity: cityData } },
+        { new: true }
     )
 }
 
-export async function addToSavedCityList(userId, cityData){
+export async function addToSavedCityList(userId, cityData) {
     return await User.findOneAndUpdate(
         userId,
-        {$addToSet: {savedCityList: cityData}},
-        {new: true}
+        { $addToSet: { savedCityList: cityData } },
+        { new: true }
     )
 }
 
-export async function removeFromSavedCityList(userId, cityName){
+export async function removeFromSavedCityList(userId, cityName) {
     return await User.findOneAndUpdate(
         userId,
-        {$pull: {savedCityList: {name: cityName}}},
-        {new: true}
+        { $pull: { savedCityList: { name: cityName } } },
+        { new: true }
     )
+}
+
+export async function getUserInfoById(userId) {
+    try {
+        const user = await User.findById(userId)
+        if (!user) return { username: userId }
+        return { username: user.name }
+    } catch (e) {
+        return { username: userId }
+    }
 }

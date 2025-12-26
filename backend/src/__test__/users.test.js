@@ -97,4 +97,9 @@ describe('creating user', () => {
             lon: 151.2093
         },)
     })
+
+    test("Retrieving user's name should work", async () => {
+        const user = await User.findById(globalUser._id);
+        expect(user.name).toMatch("Global Test")
+    })
 })
