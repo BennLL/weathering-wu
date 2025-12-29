@@ -25,7 +25,7 @@ export const login = async ({ username, password }) => {
 }
 
 export const getUserInfo = async (id) => {
-    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/user/${id}`, {
+    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/users/${id}`, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     })

@@ -48,10 +48,10 @@ export async function removeFromSavedCityList(userId, cityName) {
 
 export async function getUserInfoById(userId) {
     try {
-        const user = await User.findById(userId)
-        if (!user) return { username: userId }
-        return { username: user.name }
+        const user = await User.findById(userId);
+        if(!user) return{ username: userId}
+        return {name: user.name}
     } catch (e) {
-        return { username: userId }
+        return{ username: userId}
     }
 }

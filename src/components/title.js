@@ -55,7 +55,9 @@ function Title() {
                     </>
                 ) : (
                     <div className="flex items-center gap-4 text-white">
-                        <span>Logged in as <b className="text-blue-400">{userInfo?.name || "User"}</b></span>
+                        <span>
+                            Logged in as <b className="text-blue-400">{userInfo?.name || "User"}</b>
+                        </span>
                         <button
                             onClick={() => setToken(null)}
                             className="px-4 py-2 bg-red-500 rounded-md hover:bg-red-600 transition-colors"

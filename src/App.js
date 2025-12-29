@@ -51,7 +51,8 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="whole">
+      <div className="min-w-[400px] max-w-[700px] p-[10px] mx-auto border border-[#ddd] rounded-lg shadow-[2px_2px_4px_rgba(229,221,221,0.8)] mt-24"
+      >
         <AuthContextProvider>
           <RouterProvider router={router}></RouterProvider>
         </AuthContextProvider>

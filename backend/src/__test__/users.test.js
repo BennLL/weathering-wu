@@ -1,6 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 import { describe, expect, test } from '@jest/globals'
-import { addToSavedCityList, createUser, removeFromSavedCityList, updateFavoriteCity } from "../services/user.js";
+import { addToSavedCityList, createUser, getUserInfoById, removeFromSavedCityList, updateFavoriteCity } from "../services/user.js";
 import { User } from "../db/models/user.js";
 
 describe('creating user', () => {
@@ -99,7 +99,7 @@ describe('creating user', () => {
     })
 
     test("Retrieving user's name should work", async () => {
-        const user = await User.findById(globalUser._id);
+        const user = await getUserInfoById(globalUser._id)
         expect(user.name).toMatch("Global Test")
     })
 })
