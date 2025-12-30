@@ -30,7 +30,7 @@ function SearchResult({ result }) {
                             onClick={() => {
                                 fetchWeatherDetails(city.lat, city.lon);
                             }}>
-                            {city.name}, {city.state}, {city.country}<br></br> Lat: {city.lat.toFixed(2)} Lon: {city.lon.toFixed(2)}
+                            {city.name}, {city.state? `${city.state},` : ""} {city.country}<br></br> Lat: {city.lat.toFixed(2)} Lon: {city.lon.toFixed(2)}
                         </li>)}
             </ul>
             <CityDetails city={individualResult}></CityDetails>

@@ -38,7 +38,7 @@ function SearchBar() {
             <input
                 type="text"
                 placeholder="Search up a city"
-                className="searchBar"
+                className="w-[97%] h-[40px] p-[1%] rounded-lg text-[25px] font-['Kode_Mono'] mono-optical-auto outline-none text-black"
                 onChange={(e) => setSearch(e.target.value)}>
             </input>
             <SearchResult result = {result}></SearchResult>

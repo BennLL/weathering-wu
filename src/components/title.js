@@ -18,7 +18,7 @@ function Title() {
         }
     }
 
-    const { data: userInfo, isLoading } = useQuery({
+    const { data: userInfo } = useQuery({
         queryKey: ['users', userId],
         queryFn: () => getUserInfo(userId),
         enabled: !!userId,
@@ -56,11 +56,13 @@ function Title() {
                 ) : (
                     <div className="flex items-center gap-4 text-white">
                         <span>
-                            Logged in as <b className="text-blue-400">{userInfo?.name || "User"}</b>
+                            Logged in as <b className="underline">{userInfo?.name || "User"}</b>
                         </span>
                         <button
                             onClick={() => setToken(null)}
-                            className="px-4 py-2 bg-red-500 rounded-md hover:bg-red-600 transition-colors"
+                            className="px-4 py-2 rounded-md transition-all duration-300
+                            bg-black text-white border-2 border-white 
+                            hover:bg-white hover:text-black"
                         >
                             Logout
                         </button>
