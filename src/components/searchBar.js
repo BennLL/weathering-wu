@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchResult from './searchResult';
+import UserSaved from './userSaved';
 
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -26,6 +27,8 @@ function SearchBar() {
                     }).catch(error => {
                         console.log("Error:", error)
                     });
+            } else {
+                setResult([]);
             }
         }, 400);
         return () => {
@@ -41,7 +44,8 @@ function SearchBar() {
                 className="w-[97%] h-[40px] p-[1%] rounded-lg text-[25px] font-['Kode_Mono'] mono-optical-auto outline-none text-black"
                 onChange={(e) => setSearch(e.target.value)}>
             </input>
-            <SearchResult result = {result}></SearchResult>
+            <SearchResult result={result}></SearchResult>
+            <UserSaved></UserSaved>
         </div>
     )
 }

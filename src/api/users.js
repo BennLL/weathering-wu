@@ -31,3 +31,20 @@ export const getUserInfo = async (id) => {
     })
     return await res.json();
 }
+
+export const updateFavoriteCity = async (id, cityData) => {
+    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/users/${id}/updateFavorite`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cityData)
+    })
+    return await res.json();
+}
+
+export const getUserFavoriteCity = async (id) => {
+    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/users/${id}/getFavorite`, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' }
+    })
+    return await res.json();
+}

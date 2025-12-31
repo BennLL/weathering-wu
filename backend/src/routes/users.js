@@ -1,4 +1,4 @@
-import { createUser, loginUser, getUserInfoById} from "../services/user.js"
+import { createUser, loginUser, getUserInfoById, updateFavoriteCity, getUserFavoriteCity } from "../services/user.js"
 
 export function userRoutes(app) {
     app.post('/api/v1/user/signup', async (req, res) => {
@@ -27,5 +27,22 @@ export function userRoutes(app) {
         const userInfo = await getUserInfoById(req.params.id)
         return res.status(200).send(userInfo)
     })
+
+    app.post('/api/v1/users/:id/updateFavorite', async (req, res) => {
+        try {
+            const favorited = await updateFavoriteCity(req.params.id, req.body)
+            return res.status(200).json(favorited)
+        } catch (e) {
+            return res.status(400).json({
+                error: "Favoriting city failed."
+            })
+        }
+    })
+
+    app.get("/api/v1/users/:id/getFavorite", async (req, res) => {
+        const userFav = await getUserFavoriteCity(req.params.id)
+        return res.status(200).send(userFav)
+    })
+
 }
-//routes
+

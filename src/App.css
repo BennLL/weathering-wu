@@ -22,13 +22,13 @@ body {
 }
 
 /* title */
-.titleSection{
+.titleSection {
   text-align: center;
 }
 
-.titleSection > h1{
+.titleSection>h1 {
   font-size: 50px;
-  text-shadow:2px 2px 4px rgba(229, 221, 221, 0.8);
+  text-shadow: 2px 2px 4px rgba(229, 221, 221, 0.8);
 }
 
 /* searchbar */
@@ -74,7 +74,7 @@ li {
   font-weight: bold;
 }
 
-.cityDetails>h1 {
+.cityDetails>div>h1 {
   color: #333;
   font-size: 24px;
 }
@@ -131,6 +131,7 @@ hr:not(.thunder) {
   from {
     transform: rotate(105deg) translateX(0);
   }
+
   to {
     transform: rotate(105deg) translateX(calc(300vw + 20px));
   }
@@ -155,38 +156,38 @@ hr:not(.thunder) {
 
 
 @media screen and (max-width: 800px) {
-  body{
+  body {
     margin: 20px;
   }
 
-  .whole{
+  .whole {
     min-width: 200px;
     padding: 5px;
     margin: auto;
   }
 
   /* Title */
-  .titleSection > h1{
+  .titleSection>h1 {
     font-size: 30px;
   }
 
   /* search bar */
-  .searchBar{
+  .searchBar {
     height: 30px;
     font-size: 20px;
   }
 
   /* search result */
-  .searchResultSection{
+  .searchResultSection {
     font-size: 90%;
   }
 
-  li{
+  li {
     margin-top: 2px;
   }
 
   /* cityDetails */
-  .cityDetails{
+  .cityDetails {
     font-size: 90%;
     max-height: 90%;
   }

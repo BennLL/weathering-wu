@@ -22,13 +22,6 @@ export async function loginUser({ username, password }) {
     return token;
 }
 
-export async function updateFavoriteCity(userId, cityData) {
-    return await User.findOneAndUpdate(
-        userId,
-        { $set: { favoriteCity: cityData } },
-        { new: true }
-    )
-}
 
 export async function addToSavedCityList(userId, cityData) {
     return await User.findOneAndUpdate(
@@ -49,9 +42,22 @@ export async function removeFromSavedCityList(userId, cityName) {
 export async function getUserInfoById(userId) {
     try {
         const user = await User.findById(userId);
-        if(!user) return{ username: userId}
-        return {name: user.name}
+        if (!user) return { username: userId }
+        return { name: user.name }
     } catch (e) {
-        return{ username: userId}
+        return { username: userId }
     }
+}
+
+export async function updateFavoriteCity(userId, cityData) {
+    return await User.findByIdAndUpdate(
+        userId,
+        { $set: { favoriteCity: cityData } },
+        { new: true }
+    )
+}
+
+export async function getUserFavoriteCity(userId) {
+    const user = await User.findById(userId);
+    return { favoriteCity: user.favoriteCity }
 }
