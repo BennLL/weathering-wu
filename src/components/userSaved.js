@@ -1,52 +1,50 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import { getUserFavoriteCity } from "../api/users";
 import CityDetails from "./cityDetails";
+import { useQuery } from "@tanstack/react-query"; 
 
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 
 export default function UserSaved() {
     const [token] = useAuth();
-    const [individualResult, setIndividualResult] = useState(null);
 
-    const fetchWeatherDetails = async (lat, lon) => {
+    let userId = null;
+    if (token) {
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
-            const data = await response.json();
-            setIndividualResult(data);
-        } catch (error) {
-            console.error("City Detail Display Error:", error);
-        } 
-    };
+            const decoded = jwtDecode(token);
+            userId = decoded.sub || decoded.id || decoded._id;
+        } catch (e) {
+            console.error("Token error", e);
+        }
+    }
 
-    useEffect(() => {
-        const getSavedAndFetchWeather = async () => {
-            if (!token) return;
+    const { data: favoriteData } = useQuery({
+        queryKey: ['favorites'], 
+        queryFn: () => getUserFavoriteCity(userId),
+        enabled: !!userId, 
+    });
 
-            try {
-                const decoded = jwtDecode(token);
-                const userId = decoded.sub || decoded.id || decoded._id;
+    const savedCity = favoriteData?.favoriteCity; 
 
-                const dbResponse = await getUserFavoriteCity(userId);
-                const savedCity = dbResponse.favoriteCity;
+    const { data: weatherData } = useQuery({
+        queryKey: ['weather', savedCity?.lat, savedCity?.lon], 
+        queryFn: async () => {
+            const response = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?lat=${savedCity.lat}&lon=${savedCity.lon}&appid=${key}&units=metric`
+            );
+            return response.json();
+        },
 
-                if (savedCity && savedCity.lat && savedCity.lon) {
-                    await fetchWeatherDetails(savedCity.lat, savedCity.lon);
-                } 
-            } catch (err) {
-                console.error("Initialization error:", err);
-            }
-        };
+        enabled: !!savedCity?.lat && !!savedCity?.lon, 
+    });
 
-        getSavedAndFetchWeather();
-    }, [token]);
-
+    if (!token) return null;
 
     return (
         <div className="saved-weather-container">
             <h2 className="p-4 text-white font-kode">Your Saved Favorite:</h2>
-            <CityDetails city={individualResult} />
+            <CityDetails city={weatherData} />
         </div>
     );
 }

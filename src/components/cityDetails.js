@@ -1,9 +1,11 @@
 import { useAuth } from "../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import { updateFavoriteCity } from "../api/users.js";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function CityDetails({ city, onClose }) {
     const [token] = useAuth();
+    const queryClient = useQueryClient();
 
     let userId = null;
     if (token) {
@@ -15,14 +17,21 @@ function CityDetails({ city, onClose }) {
         }
     }
 
-    const handleUpdateFavCity = async () => {
-        let cityDetail = {
-            name: city.name,
-            lat: city.lat,
-            lon: city.lon
-        }
-        updateFavoriteCity(userId, cityDetail)
+    const handleUpdateFavCity = () => {
+        favCityMutation.mutate();
     }
+
+    const favCityMutation = useMutation({
+        mutationFn: () => updateFavoriteCity(userId, {
+            name: city.name,
+            lat: city.coord.lat,
+            lon: city.coord.lon
+        }),
+        onSuccess: ()=>{
+            queryClient.invalidateQueries({queryKey:['favorites']})
+        }
+    })
+
     if (!city || !city.coord || city.length === 0) {
         return null;
     }
