@@ -1,3 +1,7 @@
+html{
+    scrollbar-width: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,7 +10,6 @@ body {
   font-optical-sizing: auto;
   background-color: black;
   color: rgb(244, 244, 244);
-  overflow: hidden;
 }
 
 /* main section */
@@ -43,7 +46,10 @@ body {
 }
 
 /* search result */
-.searchResultSection {}
+.searchResultSection {
+  margin: 1%;
+  width: 97%;
+}
 
 ul {
   list-style-type: none;
@@ -52,7 +58,9 @@ ul {
 li {
   margin-top: 10px;
   margin-left: 0;
-  width: 99%;
+  width: 80%;
+  border-radius: 8px;
+  padding-left: 1%;
 }
 
 .list-item:hover {

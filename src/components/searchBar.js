@@ -38,12 +38,21 @@ function SearchBar() {
 
     return (
         <div className='searchBarSection'>
-            <input
-                type="text"
-                placeholder="Search up a city"
-                className="w-[97%] h-[40px] p-[1%] rounded-lg text-[25px] font-['Kode_Mono'] mono-optical-auto outline-none text-black"
-                onChange={(e) => setSearch(e.target.value)}>
-            </input>
+            <div className='relative'>
+                <input
+                    type="text"
+                    value = {search}
+                    placeholder="Search up a city"
+                    className="w-[98%] h-[40px] p-[1%] rounded-lg text-[25px] font-['Kode_Mono'] mono-optical-auto outline-none text-black ml-[1%]"
+                    onChange={(e) => setSearch(e.target.value)}>
+                </input>
+                {search ? <button
+                    onClick={() => setSearch("")}
+                    className='absolute right-3 top-10 hover:text-red-300'>
+                    clear</button> :
+                    null}
+            </div>
+
             <SearchResult result={result}></SearchResult>
             <UserSaved></UserSaved>
         </div>
