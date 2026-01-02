@@ -1,6 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 import { describe, expect, test } from '@jest/globals'
-import { addToSavedCityList, createUser, getUserInfoById, removeFromSavedCityList, updateFavoriteCity } from "../services/user.js";
+import { addToSavedCityList, createUser, getUserFavoriteCity, getUserInfoById, removeFromSavedCityList, updateFavoriteCity } from "../services/user.js";
 import { User } from "../db/models/user.js";
 
 describe('creating user', () => {
@@ -66,6 +66,15 @@ describe('creating user', () => {
             lat: 40.713,
             lon: -74.006
         });
+    })
+
+    test("Retrieving user's favorite city should work", async () => {
+        await updateFavoriteCity(globalUser._id, { name: "Austin", lat: 30.2711, lon: -97.7437 })
+        const result = await getUserFavoriteCity(globalUser._id)
+        const plainResult = JSON.parse(JSON.stringify(result));
+        expect(plainResult.favoriteCity).toMatchObject(
+            { name: "Austin", lat: 30.2711, lon: -97.7437 }
+        )
     })
 
     test("Adding cities to saved city list should work", async () => {

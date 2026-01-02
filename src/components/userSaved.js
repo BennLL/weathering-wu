@@ -2,7 +2,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import { getUserFavoriteCity } from "../api/users";
 import CityDetails from "./cityDetails";
-import { useQuery } from "@tanstack/react-query"; 
+import { useQuery } from "@tanstack/react-query";
 
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -20,15 +20,15 @@ export default function UserSaved() {
     }
 
     const { data: favoriteData } = useQuery({
-        queryKey: ['favorites'], 
+        queryKey: ['favorites'],
         queryFn: () => getUserFavoriteCity(userId),
-        enabled: !!userId, 
+        enabled: !!userId,
     });
 
-    const savedCity = favoriteData?.favoriteCity; 
+    const savedCity = favoriteData?.favoriteCity;
 
     const { data: weatherData } = useQuery({
-        queryKey: ['weather', savedCity?.lat, savedCity?.lon], 
+        queryKey: ['weather', savedCity?.lat, savedCity?.lon],
         queryFn: async () => {
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/weather?lat=${savedCity.lat}&lon=${savedCity.lon}&appid=${key}&units=metric`
@@ -36,14 +36,14 @@ export default function UserSaved() {
             return response.json();
         },
 
-        enabled: !!savedCity?.lat && !!savedCity?.lon, 
+        enabled: !!savedCity?.lat && !!savedCity?.lon,
     });
 
     if (!token) return null;
 
     return (
         <div className="saved-weather-container">
-            <h2 className="p-4 text-white font-kode">Your Saved Favorite:</h2>
+            {weatherData ? <h2 className="p-4 text-white font-kode">Your Saved Favorite:</h2> : null}
             <CityDetails city={weatherData} />
         </div>
     );

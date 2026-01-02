@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  weatheringwu-database:
+    image: mongo
+    ports:
+      - '27018:27017'
+  backend:
+    build: backend/            
+    ports:
+      - "3001:3001"              
+    environment:
+      - PORT=3001
+      - DATABASE_URL=mongodb://host.docker.internal:27018/weather
+    depends_on:
+      - weatheringwu-database                    
