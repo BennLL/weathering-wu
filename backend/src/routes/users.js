@@ -1,4 +1,4 @@
-import { createUser, loginUser, getUserInfoById, updateFavoriteCity, getUserFavoriteCity } from "../services/user.js"
+import { createUser, loginUser, getUserInfoById, updateFavoriteCity, getUserFavoriteCity, getFromSavedCityList, addToSavedCityList, removeFromSavedCityList } from "../services/user.js"
 
 export function userRoutes(app) {
     app.post('/api/v1/user/signup', async (req, res) => {
@@ -42,6 +42,39 @@ export function userRoutes(app) {
     app.get("/api/v1/users/:id/getFavorite", async (req, res) => {
         const userFav = await getUserFavoriteCity(req.params.id)
         return res.status(200).send(userFav)
+    })
+
+    app.post("/api/v1/users/:id/addToSavedCityList", async (req, res) => {
+        try {
+            const addedCity = await addToSavedCityList(req.params.id, req.body)
+            return res.status(200).json(addedCity)
+        } catch (e) {
+            return res.status(400).json({
+                error: "Adding failed."
+            })
+        }
+    })
+
+    app.post("/api/v1/users/:id/removefromSavedCityList", async (req, res) => {
+        try {
+            const cityData = req.body;
+            const updatedUser = await removeFromSavedCityList(req.params.id, cityData);
+            return res.status(200).json(updatedUser)
+        } catch (e) {
+            return res.status(400).json({
+                error: "Removing failed."
+            })
+        }
+    })
+
+    app.get("/api/v1/users/:id/getFromSavedCityList", async (req, res) => {
+        try { 
+            const userSaved = await getFromSavedCityList(req.params.id)
+            return res.status(200).send(userSaved || [])
+        } catch (e) { 
+            console.error(e);
+            return res.status(500).json({ error: "Could not fetch list" });
+        }
     })
 
 }

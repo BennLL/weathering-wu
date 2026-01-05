@@ -102,6 +102,16 @@ li {
   font-size: 20px;
 }
 
+/* user saved list */
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  
+}
 
 /* rain effect */
 :root {

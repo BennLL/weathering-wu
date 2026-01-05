@@ -1,8 +1,9 @@
 import { useAuth } from "../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import { getUserFavoriteCity } from "../api/users";
+import { getUserFavoriteCity, getFromSavedCityList } from "../api/users";
 import CityDetails from "./cityDetails";
 import { useQuery } from "@tanstack/react-query";
+import UserSavedList from "./userSavedList";
 
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -19,13 +20,20 @@ export default function UserSaved() {
         }
     }
 
+    // get favorite city
     const { data: favoriteData } = useQuery({
-        queryKey: ['favorites'],
+        queryKey: ['favorite'],
         queryFn: () => getUserFavoriteCity(userId),
         enabled: !!userId,
     });
-
     const savedCity = favoriteData?.favoriteCity;
+
+    // get saved list
+    const { data: savedList } = useQuery({
+        queryKey: ["saved"],
+        queryFn: () => getFromSavedCityList(userId),
+        enabled: !!userId,
+    })
 
     const { data: weatherData } = useQuery({
         queryKey: ['weather', savedCity?.lat, savedCity?.lon],
@@ -45,6 +53,7 @@ export default function UserSaved() {
         <div className="saved-weather-container">
             {weatherData ? <h2 className="p-4 text-white font-kode">Your Saved Favorite:</h2> : null}
             <CityDetails city={weatherData} />
+            <UserSavedList cityList={savedList} />
         </div>
     );
 }

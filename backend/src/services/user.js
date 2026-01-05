@@ -24,19 +24,33 @@ export async function loginUser({ username, password }) {
 
 
 export async function addToSavedCityList(userId, cityData) {
-    return await User.findOneAndUpdate(
+    return await User.findByIdAndUpdate(
         userId,
         { $addToSet: { savedCityList: cityData } },
         { new: true }
     )
 }
 
-export async function removeFromSavedCityList(userId, cityName) {
-    return await User.findOneAndUpdate(
+export async function removeFromSavedCityList(userId, cityData) {
+    return await User.findByIdAndUpdate(
         userId,
-        { $pull: { savedCityList: { name: cityName } } },
+        {
+            $pull: {
+                savedCityList: {
+                    name: cityData.name,
+                    lat: cityData.lat,
+                    lon: cityData.lon
+                }
+            }
+        },
         { new: true }
     )
+}
+
+export async function getFromSavedCityList(userId) {
+    const user = await User.findById(userId);
+    if(!user) return [];
+    return (user.savedCityList);
 }
 
 export async function getUserInfoById(userId) {

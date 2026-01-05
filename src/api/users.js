@@ -48,3 +48,29 @@ export const getUserFavoriteCity = async (id) => {
     })
     return await res.json();
 }
+
+export const addToSavedCityList = async (id, cityData) => {
+    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/users/${id}/addToSavedCityList`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cityData)
+    })
+    return await res.json();
+}
+
+export const removeFromSavedCityList = async (id, cityData) => {
+    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/users/${id}/removefromSavedCityList`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cityData)
+    })
+    return await res.json();
+}
+
+export const getFromSavedCityList = async (id) => {
+    const res = await fetch(`${process.env.REACT_APP_DATABASE_URL}/api/v1/users/${id}/getFromSavedCityList`, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+    })
+    return await res.json();
+}

@@ -1,6 +1,6 @@
 import { useAuth } from "../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import { updateFavoriteCity } from "../api/users.js";
+import { updateFavoriteCity, addToSavedCityList } from "../api/users.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function CityDetails({ city, onClose }) {
@@ -27,10 +27,25 @@ function CityDetails({ city, onClose }) {
             lat: city.coord.lat,
             lon: city.coord.lon
         }),
-        onSuccess: ()=>{
-            queryClient.invalidateQueries({queryKey:['favorites']})
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['favorite'] })
         }
     })
+
+    const handleAddToSavedList = () => {
+        savedCityListMutation.mutate();
+    }
+
+    const savedCityListMutation = useMutation({
+        mutationFn: () => addToSavedCityList(userId, {
+            name: city.name,
+            lat: city.coord.lat,
+            lon: city.coord.lon
+        }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["saved"] })
+        }
+    });
 
     if (!city || !city.coord || city.length === 0) {
         return null;
@@ -44,17 +59,16 @@ function CityDetails({ city, onClose }) {
                     <h1>{city.name}</h1>
                     {token ?
                         <div className="flex gap-2">
-                            <button onClick={() => handleUpdateFavCity()} className="text-black hover:text-red-700">
-                                ❤︎ㅤ
+                            <button onClick={() => handleUpdateFavCity()} className="text-black hover:text-red-700">❤︎
+                            </button>
+                            <button onClick={() => handleAddToSavedList()} className="text-black hover:text-red-700">✚
                             </button>
                             {onClose ?
-                                <button onClick={onClose} className="text-black hover:text-red-700">
-                                    ✕
+                                <button onClick={onClose} className="text-black hover:text-red-700">✕
                                 </button> :
                                 null}
                         </div>
                         : null}
-
                 </div>
 
                 <p>Lat: {city.coord.lat}, Lon: {city.coord.lon}</p>
