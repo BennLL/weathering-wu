@@ -28,7 +28,10 @@ function CityDetails({ city, onClose }) {
             lon: city.coord.lon
         }),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['favorite'] })
+            queryClient.invalidateQueries({ queryKey: ['favorite'] });
+            if(onClose){
+                onClose()
+            }
         }
     })
 
@@ -57,16 +60,18 @@ function CityDetails({ city, onClose }) {
             <div className="cityDetails">
                 <div className="flex justify-between items-center w-full">
                     <h1>{city.name}</h1>
-                    {token ?
+                    {onClose ?
                         <div className="flex gap-2">
-                            <button onClick={() => handleUpdateFavCity()} className="text-black hover:text-red-700">❤︎
+                            {token ?
+                                <>
+                                    <button onClick={() => handleUpdateFavCity()} className="text-black hover:text-red-700">❤︎
+                                    </button>
+                                    <button onClick={() => handleAddToSavedList()} className="text-black hover:text-red-700">✚
+                                    </button>
+                                </>
+                                : null}
+                            <button onClick={onClose} className="text-black hover:text-red-700">↩
                             </button>
-                            <button onClick={() => handleAddToSavedList()} className="text-black hover:text-red-700">✚
-                            </button>
-                            {onClose ?
-                                <button onClick={onClose} className="text-black hover:text-red-700">✕
-                                </button> :
-                                null}
                         </div>
                         : null}
                 </div>

@@ -1,7 +1,7 @@
-import SearchBar from "./components/searchBar";
 import Title from "./components/title";
-import { Signup } from "./components/signupForm";
-import { Login } from "./components/loginForm";
+import { Signup } from "./pages/signupForm";
+import { Login } from "./pages/loginForm";
+import HomePage from "./pages/homePage";
 import "./App.css";
 import './index.css';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (<>
       <Title />
-      <SearchBar />
+      <HomePage />
     </>)
   },
   {
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-w-[400px] max-w-[700px] p-[10px] mx-auto border border-[#ddd] rounded-lg shadow-[2px_2px_4px_rgba(229,221,221,0.8)] mt-24"
+      <div className="whole"
       >
         <AuthContextProvider>
           <RouterProvider router={router}></RouterProvider>

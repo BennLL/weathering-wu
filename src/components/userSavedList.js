@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { removeFromSavedCityList } from "../api/users.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function UserSavedList({ cityList = [] }) {
+export default function UserSavedList({ cityList = [], onSelect }) {
     const [token] = useAuth();
     const queryClient = useQueryClient();
 
@@ -38,9 +38,17 @@ export default function UserSavedList({ cityList = [] }) {
             <ul className="flex overflow-x-auto gap-4 px-2 pb-4 snap-x snap-mandatory hide-scrollbar">
 
                 {cityList.length === 0 ? (
-                    <li className="text-gray-400 text-sm w-full text-center">
-                        No saved cities yet.
-                    </li>
+                    <>
+                        {token ?
+                            <h1 className="text-gray-400 text-sm w-full text-center">
+                                No saved cities yet.
+                            </h1>
+                            :
+                            <h1 className="text-gray-400 text-sm w-full text-center">
+                                Sign in for more functions
+                            </h1>
+                        }
+                    </>
                 ) : (
                     cityList.map((city, index) => (
                         <li
@@ -56,6 +64,7 @@ export default function UserSavedList({ cityList = [] }) {
                                 flex flex-col justify-center
                                 hover:bg-white/15 transition duration-300
                             "
+                            onClick={() => onSelect(city.lat, city.lon)}
                         >
                             <div className="flex justify-between items-center w-full">
                                 <h4 className="text-white text-lg font-bold truncate">
@@ -63,10 +72,12 @@ export default function UserSavedList({ cityList = [] }) {
                                 </h4>
                                 <button
                                     className="hover:text-red-300"
-                                    onClick={() => handleRemoveFromSavedList(city)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveFromSavedList(city)
+                                    }}
                                 >✕</button>
                             </div>
-
 
                             <p className="text-gray-300 text-xs truncate mb-2">
                                 {city.state ? `${city.state}, ` : ""}{city.country}
