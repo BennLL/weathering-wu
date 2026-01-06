@@ -30,17 +30,16 @@ function Title() {
                 <h1>Weathering WU</h1>
             </div>
             <div className="nav-menu ">
-                <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                        isActive ? "nav-link active" : "nav-link"
-                    }
-                >
-                    Search
-                </NavLink>
-
                 {!token ? (
                     <>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                isActive ? "nav-link active" : "nav-link"
+                            }
+                        >
+                            Search
+                        </NavLink>
                         <NavLink to="/signup" className={({ isActive }) =>
                             isActive ? "nav-link active" : "nav-link"
                         }>
