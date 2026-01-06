@@ -37,9 +37,8 @@ export async function removeFromSavedCityList(userId, cityData) {
         {
             $pull: {
                 savedCityList: {
-                    name: cityData.name,
-                    lat: cityData.lat,
-                    lon: cityData.lon
+                    lat: {$eq: cityData.lat},
+                    lon: {$eq: cityData.lon}
                 }
             }
         },

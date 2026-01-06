@@ -29,12 +29,11 @@ function Title() {
             <div className="titleSection">
                 <h1>Weathering WU</h1>
             </div>
-            <div className="flex flex-row gap-6 justify-center p-6 ">
+            <div className="nav-menu ">
                 <NavLink
                     to="/"
                     className={({ isActive }) =>
-                        `px-4 py-2 rounded-md transition-all duration-300 ${isActive ? "bg-white text-black" : "text-white hover:bg-white/10"
-                        }`
+                        isActive ? "nav-link active" : "nav-link"
                     }
                 >
                     Search
@@ -43,26 +42,24 @@ function Title() {
                 {!token ? (
                     <>
                         <NavLink to="/signup" className={({ isActive }) =>
-                            `px-4 py-2 rounded-md transition-all ${isActive ? "bg-white text-black" : "text-white hover:bg-white/10"}`
+                            isActive ? "nav-link active" : "nav-link"
                         }>
                             Sign Up
                         </NavLink>
                         <NavLink to="/login" className={({ isActive }) =>
-                            `px-4 py-2 rounded-md transition-all ${isActive ? "bg-white text-black" : "text-white hover:bg-white/10"}`
+                            isActive ? "nav-link active" : "nav-link"
                         }>
                             Login
                         </NavLink>
                     </>
                 ) : (
-                    <div className="flex items-center gap-4 text-white">
+                    <div className="user-info">
                         <span>
-                            Logged in as <b className="underline">{userInfo?.name || "User"}</b>
+                            Logged in as <b className="username">{userInfo?.name || "User"}</b>
                         </span>
                         <button
                             onClick={() => setToken(null)}
-                            className="px-4 py-2 rounded-md transition-all duration-300
-                            bg-black text-white border-2 border-white 
-                            hover:bg-white hover:text-black"
+                            className="logout-btn"
                         >
                             Logout
                         </button>

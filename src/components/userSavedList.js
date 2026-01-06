@@ -29,22 +29,21 @@ export default function UserSavedList({ cityList = [], onSelect }) {
     })
 
     return (
-        <div className="w-full mt-8 ">
+        <div className="saved-list-container ">
             {cityList.length > 0 && (
-                <h3 className="text-white text-lg mb-3 pl-2">
+                <h3 className="saved-list-title">
                     Saved Collection
                 </h3>
             )}
-            <ul className="flex overflow-x-auto gap-4 px-2 pb-4 snap-x snap-mandatory hide-scrollbar">
-
+            <ul className="saved-list-scroll-area">
                 {cityList.length === 0 ? (
                     <>
                         {token ?
-                            <h1 className="text-gray-400 text-sm w-full text-center">
+                            <h1 className="empty-message">
                                 No saved cities yet.
                             </h1>
                             :
-                            <h1 className="text-gray-400 text-sm w-full text-center">
+                            <h1 className="empty-message">
                                 Sign in for more functions
                             </h1>
                         }
@@ -53,25 +52,15 @@ export default function UserSavedList({ cityList = [], onSelect }) {
                     cityList.map((city, index) => (
                         <li
                             key={index}
-                            className="
-                                flex-shrink-0 
-                                w-48 h-32 
-                                border border-white
-                                rounded-xl 
-                                p-4 
-                                shadow-lg 
-                                snap-center 
-                                flex flex-col justify-center
-                                hover:bg-white/15 transition duration-300
-                            "
+                            className="saved-city-card"
                             onClick={() => onSelect(city.lat, city.lon)}
                         >
-                            <div className="flex justify-between items-center w-full">
-                                <h4 className="text-white text-lg font-bold truncate">
+                            <div className="card-header">
+                                <h4 className="city-name ">
                                     {city.name}
                                 </h4>
                                 <button
-                                    className="hover:text-red-300"
+                                    className="remove-btn"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         handleRemoveFromSavedList(city)
@@ -79,15 +68,15 @@ export default function UserSavedList({ cityList = [], onSelect }) {
                                 >✕</button>
                             </div>
 
-                            <p className="text-gray-300 text-xs truncate mb-2">
-                                {city.state ? `${city.state}, ` : ""}{city.country}
+                            <p className="city-location">
+                                {city.state ? `${city.state}` : ""}<br />{city.country}
                             </p>
 
-                            <div className="mt-auto pt-2 border-t border-white">
-                                <p className="text-gray-200">
+                            <div className="card-footer ">
+                                <p className="coord-text ">
                                     Lat: {Number(city.lat).toFixed(2)}
                                 </p>
-                                <p className="text-gray-200">
+                                <p className="coord-text ">
                                     Lon: {Number(city.lon).toFixed(2)}
                                 </p>
                             </div>

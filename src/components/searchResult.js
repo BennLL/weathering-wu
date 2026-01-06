@@ -1,16 +1,18 @@
-function SearchResult({ result, onCityClick}) {
+function SearchResult({ result = [], onCityClick}) {
+
+    const safeResult = Array.isArray(result) ? result : [];
     return (
         <div className="searchResultSection">
             <ul
-                className="list">
-                {result.length === 0
+                className="searchResultList">
+                {safeResult.length === 0
                     ? null
-                    : result.map((city, index) =>
+                    : safeResult.map((city, index) =>
                         <li
                             key={index}
                             className="list-item"
                             onClick={() => {
-                                onCityClick(city.lat, city.lon);
+                                onCityClick(city.lat, city.lon, {state: city.state, country: city.country });
                             }}>
                             {city.name}, {city.state ? `${city.state},` : ""} {city.country}<br></br> Lat: {city.lat.toFixed(2)} Lon: {city.lon.toFixed(2)}
                         </li>)}

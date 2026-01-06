@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate, Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { login } from "../api/users";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -27,15 +26,15 @@ export function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto p-4">
-
+        <form onSubmit={handleSubmit} className="login-form">
             <input
                 type="text"
                 name="create-username"
                 id="create-username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)} placeholder="Username"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-black"
+                onChange={(e) => setUsername(e.target.value)} 
+                placeholder="Username"
+                className="login-input"
             />
 
             <input
@@ -43,15 +42,15 @@ export function Login() {
                 name="create-password"
                 id="create-password"
                 value={password}
-                onChange={(e) =>
-                    setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-black" />
+                className="login-input" 
+            />
 
             <button
                 type="submit"
                 disabled={loginMutation.isPending}
-                className="mt-2 px-4 py-2 rounded-md border disabled:opacity-60 disabled:cursor-not-allowed hover:text-black hover:bg-white"
+                className="login-button"
             >
                 {loginMutation.isPending ? 'Logging in...' : 'Log in'}
             </button>

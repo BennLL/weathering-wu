@@ -31,7 +31,7 @@ export default function HomePage() {
         setIndividualResult(null);
     }, [userId])
 
-    // get favorite city
+    // get user favorite city
     const { data: favoriteData } = useQuery({
         queryKey: ['favorite', userId],
         queryFn: () => getUserFavoriteCity(userId),
@@ -39,7 +39,7 @@ export default function HomePage() {
     });
     const savedCity = favoriteData?.favoriteCity;
 
-    // get saved list
+    // get user saved list
     const { data: savedList } = useQuery({
         queryKey: ["saved", userId],
         queryFn: () => getFromSavedCityList(userId),
@@ -66,8 +66,13 @@ export default function HomePage() {
                 fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${key}`)
                     .then(response => response.json())
                     .then(data => {
+                        if (Array.isArray(data)) {
+                            setResult(data);
+                        } else {
+                            setResult([]);
+                        }
                         console.log('API response:', data);
-                        setResult(data);
+                        setResult(data || []);
                     }).catch(error => {
                         console.log("Error:", error)
                     });
@@ -80,13 +85,18 @@ export default function HomePage() {
         };
     }, [search]);
 
-    // fetching specific cityu result
-    const fetchWeatherDetails = async (lat, lon) => {
+    const fetchWeatherDetails = async (lat, lon, locationInfo = {}) => {
         try {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
             const data = await response.json();
-            console.log('weather details', data)
-            setIndividualResult(data);
+
+            const mergedData = {
+                ...data,
+                state: locationInfo.state || "",
+                countryName: locationInfo.country,
+            }
+            console.log('weather details', mergedData)
+            setIndividualResult(mergedData);
         } catch (error) {
             console.log("City Detail Display Error:", error)
         }
@@ -95,20 +105,24 @@ export default function HomePage() {
     const activeCity = individualResult || weatherData;
 
     return (
-        <div className='searchBarSection'>
-            <div className='relative'>
+        <div>
+            <div className='input-wrapper'>
                 <input
                     type="text"
                     value={search}
                     placeholder="Search up a city"
-                    className="w-[98%] h-[40px] p-[1%] rounded-lg text-[25px] font-['Kode_Mono'] mono-optical-auto outline-none text-black ml-[1%]"
+                    className="search-input"
                     onChange={(e) => setSearch(e.target.value)}>
                 </input>
-                {search ? <button
-                    onClick={() => setSearch("")}
-                    className='absolute right-3 top-10 hover:text-red-300'>
-                    clear</button> :
-                    null}
+
+                {search ? (
+                    <button
+                        onClick={() => setSearch("")}
+                        className='clear-btn'
+                    >
+                        clear
+                    </button>
+                ) : null}
             </div>
 
             <SearchResult
@@ -117,8 +131,8 @@ export default function HomePage() {
             </SearchResult>
 
             {activeCity && (
-                <div>
-                    <h2 className="p-1 text-white">
+                <div key={activeCity.name} className="refresh-anim">
+                    <h2 className='activity'>
                         {`Your ${activeCity === weatherData ? "Saved Favorite:" : "Search Result"}`}
                     </h2>
                     <CityDetails
@@ -134,5 +148,3 @@ export default function HomePage() {
         </div>
     )
 }
-
-

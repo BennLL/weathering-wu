@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-
 import { signup } from "../api/users";
-
 
 export function Signup() {
     const [name, setName] = useState('');
@@ -26,7 +24,7 @@ export function Signup() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 max-w-sm mx-auto p-4"
+            className="signup-form"
         >
             <input
                 type="text"
@@ -35,7 +33,7 @@ export function Signup() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-black"
+                className="signup-input"
             />
 
             <input
@@ -45,7 +43,7 @@ export function Signup() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-black"
+                className="signup-input"
             />
 
             <input
@@ -55,17 +53,16 @@ export function Signup() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-black"
+                className="signup-input"
             />
 
             <button
                 type="submit"
                 disabled={signupMutation.isPending}
-                className="mt-2 px-4 py-2 rounded-md border disabled:opacity-60 disabled:cursor-not-allowed hover:text-black hover:bg-white"
+                className="signup-button"
             >
                 {signupMutation.isPending ? "Creating Account..." : "Sign Up"}
             </button>
         </form>
     );
-
 }

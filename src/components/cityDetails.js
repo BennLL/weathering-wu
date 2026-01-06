@@ -24,12 +24,14 @@ function CityDetails({ city, onClose }) {
     const favCityMutation = useMutation({
         mutationFn: () => updateFavoriteCity(userId, {
             name: city.name,
+            country: city.sys?.country || city.countryName,
+            state: city.state || "",
             lat: city.coord.lat,
             lon: city.coord.lon
         }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['favorite'] });
-            if(onClose){
+            if (onClose) {
                 onClose()
             }
         }
@@ -42,6 +44,8 @@ function CityDetails({ city, onClose }) {
     const savedCityListMutation = useMutation({
         mutationFn: () => addToSavedCityList(userId, {
             name: city.name,
+            country: city.sys.country,
+            state: city?.state,
             lat: city.coord.lat,
             lon: city.coord.lon
         }),
@@ -55,27 +59,25 @@ function CityDetails({ city, onClose }) {
     }
 
     return (
-        <div className="cityDetailsSection">
-
+        <div className="city-details-section">
             <div className="cityDetails">
-                <div className="flex justify-between items-center w-full">
-                    <h1>{city.name}</h1>
+                <div className="city-header">
+                    <h1 className="city-title">{city.name}</h1>
                     {onClose ?
-                        <div className="flex gap-2">
+                        <div className="action-buttons">
                             {token ?
                                 <>
-                                    <button onClick={() => handleUpdateFavCity()} className="text-black hover:text-red-700">❤︎
+                                    <button onClick={() => handleUpdateFavCity()} className="icon-btn">❤︎
                                     </button>
-                                    <button onClick={() => handleAddToSavedList()} className="text-black hover:text-red-700">✚
+                                    <button onClick={() => handleAddToSavedList()} className="icon-btn">✚
                                     </button>
                                 </>
                                 : null}
-                            <button onClick={onClose} className="text-black hover:text-red-700">↩
+                            <button onClick={onClose} className="icon-btn">↩
                             </button>
                         </div>
                         : null}
                 </div>
-
                 <p>Lat: {city.coord.lat}, Lon: {city.coord.lon}</p>
                 <p>Condition: {city.weather[0].description}</p>
                 <h4><span className="cel">{city.main.temp}°C</span> / <span className="fah">{(city.main.temp * (9 / 5) + 32).toFixed(2)}°F</span></h4>
