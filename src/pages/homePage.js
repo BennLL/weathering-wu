@@ -87,15 +87,19 @@ export default function HomePage() {
 
     const fetchWeatherDetails = async (lat, lon, locationInfo = {}) => {
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
-            const data = await response.json();
+            const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
+            const weatherData = await weatherResponse.json();
+            
+            const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
+            const forecastData = await forecastResponse.json();
 
             const mergedData = {
-                ...data,
+                ...weatherData, 
+                forecastList: forecastData.list || [],
                 state: locationInfo.state || "",
                 countryName: locationInfo.country,
             }
-            console.log('weather details', mergedData)
+            console.log('weather details', mergedData, forecastData)
             setIndividualResult(mergedData);
         } catch (error) {
             console.log("City Detail Display Error:", error)
