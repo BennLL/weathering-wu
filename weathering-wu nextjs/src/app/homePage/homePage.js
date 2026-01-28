@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import SearchResult from "../components/searchResult.js"
-import CityDetails from '../components/cityDetails';
-import UserSavedList from '../components/userSavedList';
-import { useAuth } from "../contexts/AuthContext";
+import SearchResult from "../../components/searchResult.js"
+import CityDetails from '../../components/cityDetails.js';
+import UserSavedList from '../../components/userSavedList.js';
+import { useAuth } from "../../contexts/AuthContext.js";
 import { jwtDecode } from "jwt-decode";
-import { getUserFavoriteCity, getFromSavedCityList } from "../api/users";
+import { getUserFavoriteCity, getFromSavedCityList } from "../../api/users.js";
 import { useQuery } from "@tanstack/react-query";
 
 const key = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
