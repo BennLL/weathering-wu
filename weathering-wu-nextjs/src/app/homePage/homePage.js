@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { act, useEffect, useState } from 'react';
 import SearchResult from "../../components/searchResult.js"
 import CityDetails from '../../components/cityDetails.js';
 import UserSavedList from '../../components/userSavedList.js';
@@ -112,6 +112,14 @@ export default function HomePage() {
     }
 
     const activeCity = individualResult || weatherData;
+
+    useEffect(()=>{
+        if(activeCity){
+            document.title = `${activeCity.name} ${activeCity.sys?.country} | Weathering WU`;
+        }else{
+            document.title = ` Search | Weathering WU`;
+        }
+    }, [activeCity])
 
     return (
         <div>

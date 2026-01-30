@@ -6,10 +6,20 @@ import { useAuth } from "../contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { getUserInfo } from '../api/users.js';
+import { useEffect, useState } from "react";
 
 function Title() {
     const [token, setToken] = useAuth();
     const pathname = usePathname();
+
+
+    useEffect(() => {
+        const titles = {
+            "/signup": "Sign Up",
+            "/login": "Log In",
+        }
+        document.title = ` ${titles[pathname]} | Weathering WU`;
+    }, [pathname]);
 
     let userId = null;
     if (token) {

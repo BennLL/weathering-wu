@@ -12,7 +12,7 @@ const kodeMono = Kode_Mono({
 
 export const metadata = {
   title: "Weathering WU",
-  description: "Weather App",
+  description: "A simple, fast weather dashboard built with Next.js. Check live weather and sign up to save your favorite cities for quick access!",
 };
 
 export default function RootLayout({ children }) {
