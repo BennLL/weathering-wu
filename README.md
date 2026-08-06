@@ -43,7 +43,8 @@ Made with
   <li>Current Weather API for detailed conditions: <code>https://openweathermap.org/current</code></li>
 </ul>
 
-![Example Screenshots](https://img.shields.io/badge/-Showcase%20-darkgrey?style=flat)
-![ezgif-4-c666c83b23](https://github.com/BennLL/weathering-wu/assets/110274203/bb7dc3cc-c104-40a7-8fcf-0028e047edd2)
+![Example Screenshots](https://img.shields.io/badge/-Showcase%20-darkgrey?style=flat) <br/>
+<img width="800" height="450" alt="ezgif-7441109040834935" src="https://github.com/user-attachments/assets/2ebcb395-4ed9-4955-a4ec-0eb889ba33f2" />
+
 
 <h3>Try it out: <a href="https://weathering-wu.vercel.app/">Link</a></h3>
